@@ -12,7 +12,6 @@ def SI(): return input().split()
 def solve():
     # factorization of x in tuple (factor, exponent)
     # interesting problem
-    
 
     x,y,k = II()
 
