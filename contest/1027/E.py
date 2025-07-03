@@ -20,11 +20,6 @@ def solve():
         u,v = LI()
         graph[u].append(v)
         graph[v].append(u)
-
-
-    
-    
-
     dp = [[0,0] for _ in range(n + 1)]
     
 
