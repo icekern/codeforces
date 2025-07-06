@@ -47,12 +47,14 @@ def solve():
 
         l, r = paired_w[i][1], paired_w[i][1]
         for j in range(i + 1, n):
-            if paired_w[j][0] != paired_w[i][0] or (paired_w[j][1] != l - 1 and paired_w[j][1] != r + 1):
+            if paired_w[j][0] != paired_w[i][0]:
                 break
-            if paired_w[j][1] == l - 1:
+            elif paired_w[j][1] == l - 1:
                 l = paired_w[j][1]
-            elif paired_w[j][1] == r - 1:
+            elif paired_w[j][1] == r + 1:
                 r = paired_w[j][1]
+            else:
+                break
             skip = j
 
         segments.append((paired_w[i][0],l, r))
@@ -63,7 +65,7 @@ def solve():
         if not ((l > 0 and colored[l - 1] == 1) or (r < n - 1 and colored[r + 1] == 1)):
             sol += 1
             
-        for j in range(l, r + 1):
+        for j in range(l, r+1):
             colored[j] = 1
 
     PRI(sol)
