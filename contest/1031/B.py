@@ -25,29 +25,10 @@ def solve():
     w,h,a,b = II()
     x1, y1, x2, y2 = II()
 
-    if x1 > x2:
-        x1, x2 = x2, x1
-        y1, y2 = y2, y1
-
-    diffy = abs(y1 + b - y2)
-    diffx = abs(x1 + a - x2)
-
-    PRI(f"diffx: {diffx}, diffy: {diffy}, a: {a}, b: {b}")
-
-    PRI(f"x1: {x1}, y1: {y1}, x2: {x2}, y2: {y2}, y1 + b: {y1 + b}")
-    if diffx < a and  y1 < y2 < y1 + b:
-        PRI("NO")
-    else:
+    if (x1 != x2 and (x1 - x2) % a == 0) or (y1 != y2 and (y1 - y2) % b == 0):
         PRI("YES")
-
-
-
-
-
-
-
-
-
+    else:
+        PRI("NO")
     pass
 
 def main():

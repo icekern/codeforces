@@ -16,29 +16,38 @@ def PRI(*args, **kwargs):
         print(f"{green}{kwargs.get('sep', ' ').join(map(str, args))}{reset}", **kwargs)
     else:
         print(*args, **kwargs)
-
 DEBUG = 1
-MULTI = False
+MULTI = True
 
 def solve():
 
-    n,k = II()
-    s = LI()
+    n,m,k = II()
+    k -= 1
+    matrix = [[c for c in input().strip()] for _ in range(n)]
+    pfx_2d = [[0] * (m + 1) for _ in range(n + 1)]
+    sol = 0
 
-    remainder_counts = [0] * k
+    for i in range(1, n + 1):
+        for j in range(1, m + 1):
+            pfx_2d[i][j] = pfx_2d[i - 1][j] + pfx_2d[i][j - 1]  - pfx_2d[i - 1][j - 1]+ (1 if matrix[i - 1][j - 1] == "g" else 0)
+        
+    # the rectangle can exceed the bounds of the matrix
+    def calculate_rectangle_sum(x1, y1, x2, y2):
+        x1 = max(1, x1)
+        y1 = max(1, y1)
+        x2 = min(n, x2)
+        y2 = min(m, y2)
+        return pfx_2d[x2][y2] - pfx_2d[x1 - 1][y2] - pfx_2d[x2][y1 - 1] + pfx_2d[x1 - 1][y1 - 1]
+    
+    total_gold = sum(i.count("g") for i in matrix)
 
-    for x in s:
-        remainder_counts[x % k] += 1
+    for i in range(1, n + 1):
+        for j in range(1, m + 1):
+            if matrix[i - 1][j - 1] == ".":
+                gold_inside_crop = calculate_rectangle_sum(i - k, j - k, i + k, j + k)
+                sol = max(sol, total_gold - gold_inside_crop)
 
-    sol = sum(max(remainder_counts[i], remainder_counts[k - i]) for i in range(1, k // 2 + k % 2))
-
-    if remainder_counts[0] > 0:
-        sol += 1
-    if k % 2 == 0:
-        sol += 1 if remainder_counts[k // 2] > 0 else 0
-
-
-    print(max(1,sol))
+    PRI(sol)
 
 def main():
     if MULTI:
