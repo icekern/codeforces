@@ -1,3 +1,7 @@
+# Created on: 11/07/2025 14:47:08
+# Author: Porcelli
+# GitHub: https://github.com/icekern/codeforces
+
 import sys
 from collections import defaultdict, deque
 import math
@@ -17,12 +21,33 @@ def PRI(*args, **kwargs):
     else:
         print(*args, **kwargs)
 
-# https://github.com/icekern/codeforces
-
 DEBUG = 1
 MULTI = True 
 
 def solve():
+
+
+    n = I()
+    a = LI()
+
+    s1 = set()
+    s1.add(str(a[0]))
+    s2 = set()
+    sol = 1
+
+    for i in range(1,n):
+        s2.add(str(a[i]))
+        if str(a[i]) in s1:
+            s1.remove(str(a[i]))
+        
+        if len(s1) == 0:
+            sol += 1
+            s1, s2 = s2, s1
+        
+    PRI(sol)
+
+
+
     pass
 
 def main():

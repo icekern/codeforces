@@ -1,3 +1,7 @@
+# Created on: 11/07/2025 15:08:11
+# Author: Porcelli
+# GitHub: https://github.com/icekern/codeforces
+
 import sys
 from collections import defaultdict, deque
 import math
@@ -17,12 +21,34 @@ def PRI(*args, **kwargs):
     else:
         print(*args, **kwargs)
 
-# https://github.com/icekern/codeforces
-
 DEBUG = 1
 MULTI = True 
 
 def solve():
+
+    n = I()
+    a = LI()
+
+
+    flag = True
+    
+    for i in range(1, n):
+        if a[i] - a[i - 1] != a[1] - a[0]:  
+            flag = False
+        
+    if flag:
+
+        for i in range(n):
+            if a[1] - a[0] > 0:
+                a[i] = a[i] - (a[1] - a[0]) * (i + 1)
+            else:
+                a[i] = a[i] + (a[1] - a[0]) * (n - i)
+        
+    if (a[0] >= 0 and a[0] % (n + 1) == 0) and flag:
+        PRI("YES")
+    else:
+        PRI("NO")
+
     pass
 
 def main():
