@@ -1,4 +1,4 @@
-# Created on: 15/07/2025 15:24:27
+# Created on: 16/07/2025 10:09:28
 # Author: Porcelli
 # GitHub: https://github.com/icekern/codeforces
 
@@ -25,27 +25,32 @@ DEBUG = 1
 MULTI = True 
 
 def solve():
+
+    n,k = LI()
+
+    # ternary search over val
+
     def val(mid):
         val1 = (mid+k-1+k)*mid//2
         val2 = (k+n-1+k)*n//2 - val1
-        return val1,val2
+        return abs(val1 - val2)
     
-    n,k = map(int,input().split())
-    lo = 1
-    hi = n
-    curr = 1
-    while lo <= hi:
-        mid = (lo+hi)//2
-        a,b = val(mid)
-        if b>a:
-            curr = mid
-            lo = mid+1
+    lo, hi = 1, n
+    
+    while lo < hi:
+        mid1 = lo + (hi - lo) // 3
+        mid2 = hi - (hi - lo) // 3
+        val1 = val(mid1)
+        val2 = val(mid2)
+        
+        if val1 < val2:
+            hi = mid2 - 1
         else:
-            hi = mid-1
-    a1,b1 = val(curr)
-    a2,b2 = val(curr+1)
-    print(min(b1-a1,a2-b2))    
+            lo = mid1 + 1
+        
+    PRI(val(lo))
 
+    pass
 
 def main():
     if MULTI:

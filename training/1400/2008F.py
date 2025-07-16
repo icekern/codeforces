@@ -1,4 +1,4 @@
-# Created on: 15/07/2025 15:24:27
+# Created on: 16/07/2025 11:05:01
 # Author: Porcelli
 # GitHub: https://github.com/icekern/codeforces
 
@@ -23,29 +23,30 @@ def PRI(*args, **kwargs):
 
 DEBUG = 1
 MULTI = True 
+MOD = 10**9 + 7
+
+def modinv(a, m):
+    return pow(a, m - 2, m)
 
 def solve():
-    def val(mid):
-        val1 = (mid+k-1+k)*mid//2
-        val2 = (k+n-1+k)*n//2 - val1
-        return val1,val2
-    
-    n,k = map(int,input().split())
-    lo = 1
-    hi = n
-    curr = 1
-    while lo <= hi:
-        mid = (lo+hi)//2
-        a,b = val(mid)
-        if b>a:
-            curr = mid
-            lo = mid+1
-        else:
-            hi = mid-1
-    a1,b1 = val(curr)
-    a2,b2 = val(curr+1)
-    print(min(b1-a1,a2-b2))    
 
+    n = I()
+    a = LI()
+
+    tot_sum = sum(a)
+    numerator = 0
+    denominator = n
+
+    for i in range(n):
+        tot_sum -= a[i]
+        numerator += a[i] * (tot_sum)
+        numerator %= MOD
+        
+    result = (numerator * pow(((denominator - 1) * (denominator) * pow(2,-1,MOD)) % MOD,-1,MOD)) % MOD
+
+    PRI(result)
+
+    pass
 
 def main():
     if MULTI:

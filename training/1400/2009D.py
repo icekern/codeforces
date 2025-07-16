@@ -1,4 +1,4 @@
-# Created on: 15/07/2025 15:24:27
+# Created on: 16/07/2025 10:39:08
 # Author: Porcelli
 # GitHub: https://github.com/icekern/codeforces
 
@@ -25,27 +25,32 @@ DEBUG = 1
 MULTI = True 
 
 def solve():
-    def val(mid):
-        val1 = (mid+k-1+k)*mid//2
-        val2 = (k+n-1+k)*n//2 - val1
-        return val1,val2
-    
-    n,k = map(int,input().split())
-    lo = 1
-    hi = n
-    curr = 1
-    while lo <= hi:
-        mid = (lo+hi)//2
-        a,b = val(mid)
-        if b>a:
-            curr = mid
-            lo = mid+1
-        else:
-            hi = mid-1
-    a1,b1 = val(curr)
-    a2,b2 = val(curr+1)
-    print(min(b1-a1,a2-b2))    
+    n = I()
+    sett = [tuple(LI()) for _ in range(n)]
+    sett = sett[::-1]
 
+    pfx = [0] * (n + 1)
+
+    for p in sett:
+        pfx[p[0]] += 1
+
+    for i in range(1, n + 1):
+        pfx[i] += pfx[i - 1]
+    
+    sol = 0
+    for i in range(n + 1):
+        if (i,0) in sett and (i,1) in sett:
+            sol += pfx[i - 1] if i > 0 else 0
+            sol += pfx[n] - pfx[i]
+        
+        if 0 < i < n:
+            if (i,0) in sett and (i-1,1) in sett and (i+1,1) in sett:
+                sol += 1
+            if (i,1) in sett and (i+1,0) in sett and (i-1,0) in sett:
+                sol += 1
+
+    PRI(sol)
+    pass
 
 def main():
     if MULTI:
