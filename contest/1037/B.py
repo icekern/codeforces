@@ -19,7 +19,7 @@ def PRI(*args, **kwargs):
 
 # https://github.com/icekern/codeforces
 
-DEBUG = 1
+DEBUG = 0
 MULTI = True 
 
 def solve():
@@ -34,12 +34,12 @@ def solve():
         pfx[i] = pfx[i-1] + a[i]
 
     ans = 0
-    skip = k - 1
+    skip = k - 2
     for i in range(n):
-        if i < skip:
+        if i <= skip:
             continue
         
-        if pfx[i] - (pfx[i - k - 1] if i - k - 1 > 0 else 0) == 0:
+        if pfx[i] - (pfx[i - k] if i - k >= 0 else 0) == 0:
             ans += 1
             skip = i + k
 

@@ -19,7 +19,7 @@ def PRI(*args, **kwargs):
 
 # https://github.com/icekern/codeforces
 
-DEBUG = 1
+DEBUG = 0
 MULTI = True 
 
 def solve():
@@ -28,26 +28,14 @@ def solve():
     casinos =[LI() for _ in range(n)]
 
 
-    queue = deque()
-
-    visited = [False] * n
+    casinos.sort(key=lambda x: x[0])
 
     for i in range(n):
-        if casinos[i][0] <= k <= casinos[i][1]:
-            queue.append(i)
-    sol = 0
-    while queue:
-        i = queue.popleft()
-        sol = max(sol, casinos[i][2])
-        if visited[i]:
-            continue
-        visited[i] = True
+        if k >= casinos[i][0] and k <= casinos[i][1] and casinos[i][2] >= k:
+            k = casinos[i][2]
 
-        for j in range(n):
-            if not visited[j] and casinos[j][0] <= casinos[i][2] <= casinos[j][1]:
-                queue.append(j)
         
-    PRI(sol)
+    PRI(k)
 
 def main():
     if MULTI:

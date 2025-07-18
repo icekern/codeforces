@@ -19,7 +19,7 @@ def PRI(*args, **kwargs):
 
 # https://github.com/icekern/codeforces
 
-DEBUG = 1
+DEBUG = 0
 MULTI = True 
 
 def solve():
@@ -32,10 +32,12 @@ def solve():
 
     start = a.index(starting_tower)
 
+    x = 0
     for i in range(start + 1,n):
-        if a[i] > a[i - 1] * 2:
+        if a[i - 1]  < a[i] - a[i - 1] + x:
             PRI("NO")
             return 
+        x += a[i] - a[i - 1]
     
     PRI("YES")
 
