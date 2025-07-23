@@ -22,29 +22,38 @@ def PRI(*args, **kwargs):
     else:
         print(*args, **kwargs)
 
-DEBUG = 0
-MULTI = True 
+DEBUG = 1
+MULTI = False
 MOD = 998244353
 
 def solve():
 
     n,m = II()
-    segments = [II() for _ in range(n)]
-    dp = [[0,0] for _ in range(m + 2)]
+    segments = [LI() for _ in range(n)]
+    dp = [0 for _ in range(m + 1)]
     segments.sort()
 
-    k = 0
-    dp[1] = [1,1]
-    for i in range(1,m):
-        while k < n and segments[k][0] == i:
-            dp[segments[k][1] + 1][0] += dp[i][0] * segments[k][2]
-            dp[segments[k][1] + 1][0] %= MOD
-            dp[segments[k][1] + 1][1] += dp[i][1] * segments[k][3]
-            dp[segments[k][1] + 1][1] %= MOD
+    dp[0] = 1
+    ppfx = [1] * (m + 1)
 
+    k = 0
+    for i in range(1,m + 1):
+        while k <= n - 1 and i == segments[k][0]:
+            ppfx[i] *= (segments[k][3] - segments[k][2]) * pow(segments[k][3], -1, MOD)
+            ppfx[i] %= MOD
+            k += 1
+        ppfx[i] *= ppfx[i - 1]
+        ppfx[i] %= MOD
+    k = 0
+    
+    for i in range(1,m + 1):
+        while k <= n - 1 and i == segments[k][0]:
+            l,r,p,q = segments[k]
+            dp[r] += dp[l - 1] * p * pow(q,-1,MOD) * pow(ppfx[l - 1], -1, MOD) * ppfx[r] * pow((q - p) * pow(q,-1,MOD), -1 , MOD)
+            dp[r] %= MOD
             k += 1
 
-    PRI(dp[m + 1])
+    PRI(dp[m])
 
     pass
 
