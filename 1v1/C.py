@@ -1,6 +1,6 @@
 # title: C.py
 # author: firekern
-# date: 2025-08-07 16:15:52
+# date: 2025-08-06 11:51:49
 # github: https://github.com/icekern/codeforces
 
 import sys
@@ -26,6 +26,16 @@ DEBUG = 1
 MULTI = True 
 
 def solve():
+    # one it s easy 
+    # two for every subsequence that is valid
+    # find if i have a subsequence that is valid too on the other guy
+    
+    # [l,r]
+
+    #
+    #
+    #
+
     pass
 
 def main():

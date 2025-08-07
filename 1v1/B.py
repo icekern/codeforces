@@ -1,6 +1,6 @@
-# title: C.py
+# title: B.py
 # author: firekern
-# date: 2025-08-07 16:15:52
+# date: 2025-08-06 11:43:17
 # github: https://github.com/icekern/codeforces
 
 import sys
@@ -26,7 +26,29 @@ DEBUG = 1
 MULTI = True 
 
 def solve():
-    pass
+
+    n,m = II()
+
+    mat = [[c for c in input()] for _ in range(n)]
+
+    rows = []
+    for i in range(n):
+        rows.append((mat[i].count('#'), i))
+
+    rows.sort(reverse=True)
+    x = rows[0][1]
+
+
+    start,end = -1, -1
+    for i in range(m):
+        if mat[x][i] == '#'and start == -1:
+            start = i     
+        if mat[x][i] == '#' and end < i:
+            end = i
+
+    PRI(x + 1, start + (end - start) // 2  + 1)
+        
+
 
 def main():
     if MULTI:

@@ -1,6 +1,6 @@
-# title: C.py
+# title: D.py
 # author: firekern
-# date: 2025-08-07 16:15:52
+# date: 2025-08-02 12:55:19
 # github: https://github.com/icekern/codeforces
 
 import sys
@@ -26,6 +26,25 @@ DEBUG = 1
 MULTI = True 
 
 def solve():
+    n=int(input())
+    arr=list(map(int,input().split()))
+    cur=0
+    for i in range(n):
+        for j in range(i):
+            if arr[i]<arr[j]:
+                cur+=1
+ 
+    for i in range(n):
+        x=0
+        for j in range(n):
+            if arr[j]>arr[i]:
+                if j<i:
+                    x+=1
+                else:
+                    x-=1
+        cur-=max(x,0)
+    PRI(cur)
+
     pass
 
 def main():

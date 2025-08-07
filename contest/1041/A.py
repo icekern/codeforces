@@ -1,6 +1,6 @@
 # title: A.py
 # author: firekern
-# date: 2025-08-01 16:22:50
+# date: 2025-08-07 16:15:48
 # github: https://github.com/icekern/codeforces
 
 import sys
@@ -26,12 +26,7 @@ DEBUG = 1
 MULTI = True 
 
 def solve():
-    n = I()
-    a = LI()
-    a.sort()
-
-    PRI(a.count(0) + sum(a))
-
+    pass
 
 def main():
     if MULTI:

@@ -1,6 +1,6 @@
-# title: C.py
+# title: A.py
 # author: firekern
-# date: 2025-08-07 16:15:52
+# date: 2025-08-06 11:29:48
 # github: https://github.com/icekern/codeforces
 
 import sys
@@ -26,6 +26,31 @@ DEBUG = 1
 MULTI = True 
 
 def solve():
+    n = I()
+    v = LI()
+
+    p = False
+    for i in range(1,n):
+        if v[i] != v[i-1]:
+            p = True
+
+    m = max(v)
+    if p:
+        PRI('YES')
+        sol = []
+        for i in range(n):
+            if v[i] == m:
+                sol.append(1)
+            else:
+                sol.append(2)
+
+        PRI(*sol)
+                
+    else:
+        PRI('NO')
+
+            
+
     pass
 
 def main():

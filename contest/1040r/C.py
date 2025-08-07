@@ -1,6 +1,6 @@
 # title: C.py
 # author: firekern
-# date: 2025-08-07 16:15:52
+# date: 2025-08-01 16:22:54
 # github: https://github.com/icekern/codeforces
 
 import sys
@@ -26,6 +26,25 @@ DEBUG = 1
 MULTI = True 
 
 def solve():
+    n = I()
+    pairs = [LI() for i in range(n)]
+    for i in range(n):
+        pairs[i].append(i + 1)
+
+    pairs.sort(key=lambda x: (x[0],  -x[1]))
+
+    sol = []
+    last_ele = 0
+
+    for i in range(n):
+        if last_ele < pairs[i][1]:
+            last_ele = pairs[i][1]
+            sol.append(pairs[i][2])
+
+    PRI(len(sol))
+    PRI(*sol)
+    
+
     pass
 
 def main():
