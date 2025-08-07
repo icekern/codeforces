@@ -26,6 +26,23 @@ DEBUG = 1
 MULTI = True 
 
 def solve():
+    n = I()
+    a = LI()
+
+    setz = set()
+    for i in range(n):
+        if a[i] != -1:
+            setz.add(a[i])
+        
+    if len(setz) == 1 or len(setz) == 0:
+        e = setz.pop() if setz else 1
+        if e == 0:
+            PRI('NO')
+        else:     
+            PRI('YES')
+    else:
+        PRI('NO')
+
     pass
 
 def main():
