@@ -39,6 +39,7 @@ def solve():
 
     sol = 0
     flag = False
+    leaf = 0
 
     for u, v in edges:
         graph[u].append(v)
@@ -46,6 +47,8 @@ def solve():
 
     for i in range(1, n + 1):
         degree[i] = len(graph[i])
+        if degree[i] == 1:
+            leaf += 1
 
     queue = deque()
     queue.append(1)
@@ -109,7 +112,12 @@ def solve():
     if flag:
         PRI(0)
     else:
-        PRI(sol * 2)
+        if leaf == n:
+            PRI(2)
+        elif leaf == n - 1:
+            PRI(factorial[n - 1] * 2 % MOD)
+        else:
+            PRI(sol * 2 % MOD)
 
 
 def main():
