@@ -1,6 +1,6 @@
-# title: 2084D.py
+# title: E.py
 # author: firekern
-# date: 2025-08-08 16:40:03
+# date: 2025-08-10 16:32:54
 # github: https://github.com/icekern/codeforces
 
 import sys
@@ -26,37 +26,35 @@ DEBUG = 1
 MULTI = True 
 
 def solve():
-    n, m, k = II()
-    sol = []
+    n = I()
+    a,b = LI(), LI()
+    c = [i for i in a]
+    flag = True
 
-    # array of size n
-    # i can remove k elements for m times
+    if a[n - 1] != b[n - 1]:
+        print("NO")
+        return
+
+    for i in range(n - 2, -1 , -1):
+        if a[i] == b[i]:
+            continue
+        else:
+            if a[i] ^ c[i + 1] == b[i]:
+                a[i] = a[i] ^ c[i + 1]
+            elif a[i] ^ a[i + 1] == b[i]:
+                a[i] = a[i] ^ a[i + 1]
+            
+            if a[i] != b[i]:
+                flag = False
+                break
     
-    # k is small
 
-    # k * m is small 
-    # n // (m + 1) is the number of elements that needs
-    # to stay in the array 
-    # why?
-    # because i can remove k times the 0s and win
-    # with this r 
-    # i need to place r times the 0s at distance k 
-    # if i do n // k 
-    # if n // k >= r
-    # just use n // k and place n // k elements 
-    # else what does it mean?
-    # if k <= n // (m + 1)
-
-    r = n // (m + 1)
-
-    if k <= r:
-        for i in range(n):
-            sol.append(i % r)
+    if flag:
+        print("YES")
     else:
-        for i in range(n):
-            sol.append(i % k)
-        
-    PRI(*sol)
+        print("NO")
+
+    pass
 
 def main():
     if MULTI:

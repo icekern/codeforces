@@ -1,6 +1,6 @@
-# title: 2084D.py
+# title: 2061B.py
 # author: firekern
-# date: 2025-08-08 16:40:03
+# date: 2025-08-12 21:30:40
 # github: https://github.com/icekern/codeforces
 
 import sys
@@ -26,37 +26,28 @@ DEBUG = 1
 MULTI = True 
 
 def solve():
-    n, m, k = II()
-    sol = []
-
-    # array of size n
-    # i can remove k elements for m times
+    n = I()
+    a = LI()
+    a.sort()
     
-    # k is small
-
-    # k * m is small 
-    # n // (m + 1) is the number of elements that needs
-    # to stay in the array 
-    # why?
-    # because i can remove k times the 0s and win
-    # with this r 
-    # i need to place r times the 0s at distance k 
-    # if i do n // k 
-    # if n // k >= r
-    # just use n // k and place n // k elements 
-    # else what does it mean?
-    # if k <= n // (m + 1)
-
-    r = n // (m + 1)
-
-    if k <= r:
-        for i in range(n):
-            sol.append(i % r)
+    pairs = [i for i in range(n - 1) if a[i] == a[i + 1]][::-1]
+    if len(pairs) >= 3:
+        print(a[pairs[0]], a[pairs[0]], a[pairs[2]], a[pairs[2]])
+    elif len(pairs) == 2 and pairs[1] != pairs[0] - 1:
+        print(a[pairs[0]], a[pairs[0]], a[pairs[1]], a[pairs[1]])
+    elif len(pairs) > 0:
+        b = a[: pairs[0]] + a[pairs[0] + 2 :]
+        diff = sorted([(b[i + 1] - b[i], b[i], b[i + 1]) for i in range(len(b) - 1)])
+        print(
+            *(
+                [diff[0][1], diff[0][2], a[pairs[0]], a[pairs[0]]]
+                if diff[0][0] < a[pairs[0]] * 2
+                else [-1]
+            ),
+        )
     else:
-        for i in range(n):
-            sol.append(i % k)
-        
-    PRI(*sol)
+        print(-1)
+
 
 def main():
     if MULTI:
