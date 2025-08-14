@@ -33,10 +33,50 @@ def solve():
 
     a = [int(x) for x in a]
     b = [int(x) for x in b]
-    
-    # to do 
 
-    pass
+    xx = [0] * n 
+    yy = [0] * n
+
+    zx = 0
+    ox = 0
+    zy = 0
+    oy = 0
+
+    for i in range(n):
+        if a[i] == 0:
+            zx += 1
+        else:
+            ox += 1
+
+        if b[i] == 0:
+            zy += 1
+        else:
+            oy += 1
+
+        if i == 0:
+            xx[i] = 1
+            yy[i] = 1
+        else:
+            xx[i] = abs(zx - ox)
+            yy[i] = abs(zy - oy)
+
+    for i in range(1,n):
+        xx[i] += xx[i-1]
+        yy[i] += yy[i-1]
+
+    PRI(xx)
+    PRI(yy)
+    ans = 0
+    for i in range(n):
+        ans += xx[i] - xx[i-1] if i > 0 else xx[i]
+        ans += yy[n - 1]
+
+    for i in range(n):
+        ans += yy[i] - yy[i-1] if i > 0 else yy[i]
+        ans += xx[n - 1]    
+
+    PRI(ans)
+    
 
 def main():
     if MULTI:
