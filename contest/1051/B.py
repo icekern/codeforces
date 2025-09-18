@@ -1,15 +1,10 @@
-# Author: firekern
-# Date: 2025-09-17
-# File: nome_del_file.py
-# GitHub: https://github.com/icekern/codeforces
-
 import sys
 from collections import defaultdict, deque
 import math
 import heapq
 import bisect
 
-MULTI = True 
+MULTI = True
 try:
     DEBUG = sys.stdin.isatty()
 except:
@@ -27,15 +22,31 @@ def PRI(*args, **kwargs):
     else:
         print(*args, **kwargs)
 
-# --- solve --- 
+# --- solve ---
 def solve():
-
     
+    n,k = II()
+    a = LI()
+    b = LI()
+
+    a.sort(reverse=True)
+    b.sort()
+
+    i = 0
+    j = 0
+    sol = sum(a)
+    while i < n and j < k and i + b[j] - 1 < n:
+        sol -= a[i + b[j] - 1]
+        i += b[j]
+        j += 1
+    
+    PRI(sol)
+
+
 
     pass
 
-
-# --- ignore ---=
+# --- main ---
 def main():
     if MULTI:
         for _ in range(I()):

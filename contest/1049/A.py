@@ -1,15 +1,10 @@
-# Author: firekern
-# Date: 2025-09-17
-# File: nome_del_file.py
-# GitHub: https://github.com/icekern/codeforces
-
 import sys
 from collections import defaultdict, deque
 import math
 import heapq
 import bisect
 
-MULTI = True 
+MULTI = True
 try:
     DEBUG = sys.stdin.isatty()
 except:
@@ -27,15 +22,11 @@ def PRI(*args, **kwargs):
     else:
         print(*args, **kwargs)
 
-# --- solve --- 
+# --- solve ---
 def solve():
-
-    
-
     pass
 
-
-# --- ignore ---=
+# --- main ---
 def main():
     if MULTI:
         for _ in range(I()):

@@ -1,15 +1,10 @@
-# Author: firekern
-# Date: 2025-09-17
-# File: nome_del_file.py
-# GitHub: https://github.com/icekern/codeforces
-
 import sys
 from collections import defaultdict, deque
 import math
 import heapq
 import bisect
 
-MULTI = True 
+MULTI = True
 try:
     DEBUG = sys.stdin.isatty()
 except:
@@ -27,15 +22,48 @@ def PRI(*args, **kwargs):
     else:
         print(*args, **kwargs)
 
-# --- solve --- 
+# --- solve ---
 def solve():
 
+    graph = defaultdict(list)
+
+    n = I()
+    edg = LI()
+
+
+    for i in range(1, n):
+        graph[edg[i - 1]].append(i + 1)
+
+    lr = [LI() for _ in range(n)]
+
+    l = [x[0] for x in lr]
+    r = [x[1] for x in lr]
+
+    deq = deque()
+
+    deq.append((1,l[0]))
+
+    sol = 0
+    while deq:
+        node, w = deq.pop()
+
+        for x in graph[node]:
+            if l[x - 1] <= w <= r[x - 1]:
+                w = min(w,r[x - 1])
+            else:
+                w = l[x - 1]
+                sol += 1
+            
+            deq.append((x,w))
+
+    PRI(sol)    
+            
     
+
 
     pass
 
-
-# --- ignore ---=
+# --- main ---
 def main():
     if MULTI:
         for _ in range(I()):
