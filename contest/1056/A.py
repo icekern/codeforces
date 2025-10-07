@@ -1,0 +1,47 @@
+import sys
+from collections import defaultdict, deque
+import math
+import heapq
+import bisect
+
+MULTI = True
+try:
+    DEBUG = sys.stdin.isatty()
+except:
+    DEBUG = False
+
+# --- Input Helpers ---
+def input(): return sys.stdin.readline().rstrip('\n')
+def I(): return int(input())
+def II(): return map(int, input().split())
+def LI(): return list(map(int, input().split()))
+def SI(): return input().split()
+def PRI(*args, **kwargs):
+    if DEBUG:
+        print(f"\033[92m{kwargs.get('sep', ' ').join(map(str, args))}\033[0m", file=sys.stderr, **kwargs)
+    else:
+        print(*args, **kwargs)
+
+# --- solve ---
+def solve():
+    
+    n = I()
+
+    if n % 3 == 0:
+        PRI(0)
+    elif n % 3 == 1:
+        PRI(2)
+    else:
+        PRI(1)
+    pass
+
+# --- main ---
+def main():
+    if MULTI:
+        for _ in range(I()):
+            solve()
+    else:
+        solve()
+
+if __name__ == '__main__':
+    main()
